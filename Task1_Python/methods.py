@@ -6,7 +6,7 @@ def show_notes():
     if notes_list[0] == '':
         print('Заметок нет!')
     else:
-        print(delimer)
+        print('-' * 30)
         print('Список заметок:\n')
         for note in notes_list:
             show_note(note)
@@ -18,7 +18,7 @@ def show_note(note):
           'Текст: ' + parse_note[2] + '\n')
     
 def add_note():
-    print(delimer)
+    print('-' * 30)
     check = True
     while (check):
         subject = input('Введите тему заметки: ')
@@ -33,7 +33,7 @@ def add_note():
             print('Текст заметки не должен содержать символ ";" !')
     answer = ''
     while(answer != 'y' and  answer != 'n'):
-        print(delimer)
+        print('-' * 30)
         print('Тема: ' + subject + '\n'
               'Текст: ' + body)
         answer = input('Добавить заметку? y/n \n')
@@ -41,10 +41,10 @@ def add_note():
             now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             note = str(new_index()) + ';' + subject + ';' + body + ';' + str(now) + ';' + str(now) + '\n'
             write_note(note)
-            print(delimer)
+            print('-' * 30)
             print('Заметка добавлена!')    
         elif(answer == 'n'):
-            print(delimer)
+            print('-' * 30)
             print('Создание заметки отменено!')
         else:
             print('Некорретные данные')
@@ -73,7 +73,7 @@ def new_index():
         return new_index + 1
 
 def edit_note():
-    print(delimer)
+    print('-' * 30)
     with open('notes.csv', 'r', encoding='UTF-8') as file:
         notes_list = file.read().rstrip().split('\n')
     if(notes_list[0] == ''):
@@ -90,7 +90,7 @@ def edit_note():
             input_id = check_id(notes_list, input_id)
         input_object = -1
         while input_object not in ('1', '2', '0'):
-            print(delimer)
+            print('-' * 30)
             show_note(notes_list[input_id])     
             print('Возможные действия:\n'
                 '1. Изменить тему\n'
@@ -106,7 +106,7 @@ def edit_note():
         if(input_object == '1'):
             check = True
             while (check):    
-                print(delimer)
+                print('-' * 30)
                 input_text = input('Текущая тема заметки: ' + notes_list[input_id].split(';')[1] + '\nВведите новую тему заметки:\n')
                 check = check_symbol(input_text)
                 if (check):
@@ -128,20 +128,20 @@ def edit_note():
         if(input_object == '2'):
             check = True
             while (check):
-                print(delimer)
+                print('-' * 30)
                 input_text = input('Текущий текст заметки: ' + notes_list[input_id].split(';')[2] + '\nВведите новый текст заметки:\n')
                 check = check_symbol(input_text)
                 if (check):
                     print('Текст заметки не должен содержать символ ";" !')
             answer = ''
             while(answer != 'y' and  answer != 'n'):    
-                print(delimer)
+                print('-' * 30)
                 answer = input('Заменить текст заметки с "' + notes_list[input_id].split(';')[2] + '" на "' + input_text + '"? y/n \n')
                 if (answer == 'y'):
                     note = notes_list[input_id].split(';')
                     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     notes_list[input_id] = note[0] + ';' + note[1] + ';' + input_text + ';' + note[3] + ';' + now
-                    print(delimer)
+                    print('-' * 30)
                     print('Текст заметки изменён')
                 elif(answer == 'n'):
                     print('Редактирование заметки отменено!')
@@ -151,7 +151,7 @@ def edit_note():
                 file.write('\n'.join(notes_list) + '\n')  
 
 def delete_note():
-    print(delimer)
+    print('-' * 30)
     with open('notes.csv', 'r', encoding='UTF-8') as file:
         notes_list = file.read().rstrip().split('\n')
     if(notes_list[0] == ''):
@@ -169,14 +169,14 @@ def delete_note():
 
         answer = ''
         while(answer != 'y' and  answer != 'n'):
-            print(delimer)
+            print('-' * 30)
             show_note(notes_list[input_id])
             answer = input('Удалить заметку? y/n \n')
             if (answer == 'y'):
                 notes_list.pop(input_id)
                 with open('notes.csv', 'w', encoding='UTF-8') as file:
                     file.write('\n'.join(notes_list) + '\n')
-                print(delimer)  
+                print('-' * 30)  
                 print('Заметка удалена!')    
             elif(answer == 'n'):
                 print('Удаление заметки отменено!')
@@ -194,5 +194,3 @@ def check_id(notes_list, input_id):
                 show_notes()
                 print('Заметки с ID = "' + input_id + '" нет!')
     return check_id
-
-delimer = '------------------------------------------'

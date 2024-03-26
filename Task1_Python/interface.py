@@ -5,7 +5,7 @@ def interface():
         pass
     command = '-1'
     while command != '0':
-        print(delimer)
+        print('-' * 30)
         print('Возможные действия:\n'
             '1. Просмотреть заметки\n'
             '2. Добавить заметку\n'
@@ -28,9 +28,7 @@ def interface():
             case '4':   
                 delete_note()
             case '0':   
-                print(delimer)
+                print('-' * 30)
                 print('До новых встреч!')
-
-delimer = '------------------------------------------'
 
 interface()
